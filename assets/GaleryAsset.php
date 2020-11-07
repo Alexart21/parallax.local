@@ -21,6 +21,8 @@ class GaleryAsset extends AssetBundle
         'js/scrollReveal.js',
         'js/superfish.js',
         'js/easyResponsiveTabs.js',
+        'js/velocity.min.js',
+        'js/velocity.ui.min.js',
 //        'js/wow.min.js',
         'js/main.js'
     ];

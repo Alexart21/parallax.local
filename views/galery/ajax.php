@@ -54,5 +54,7 @@ Modal::end();
 ?>
 <script>
     $('#modal-img').modal('show');
+    // $('.modal-content').velocity('transition.whirlIn');
+    $('.modal-content').velocity('transition.flipBounceYIn');
     document.title = '<?= $title ?>';
 </script>
