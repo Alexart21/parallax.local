@@ -22,6 +22,8 @@ class AppAsset extends AssetBundle
         'js/easyResponsiveTabs.js',
         'js/jquery.bgswitcher.js',
 //        'js/wow.min.js',
+        'js/velocity.min.js',
+        'js/velocity.ui.min.js',
         'js/main.js'
     ];
     public $depends = [

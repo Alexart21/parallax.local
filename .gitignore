@@ -29,3 +29,8 @@ phpunit.phar
 tests/_output/*
 tests/_support/_generated
 /web/sitemap.xml
+
+#
+/web/assets
+/web/minify
+/runtime

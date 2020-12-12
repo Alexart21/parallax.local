@@ -454,7 +454,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $data[0]['descriti
 <br>
 <br>
 <!--noindex-->
-<div class="h2" style="text-align: center">Отзывы наших клиентов</div>
+<!--<div class="h2" style="text-align: center">Отзывы наших клиентов</div>
 <div class="container flex-center">
 
     <div class="otzyv-block">
@@ -495,7 +495,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $data[0]['descriti
         уже привезли мебель. Мы считаем, что это очень оперативно.
         </p>
     </div>
-</div>
+</div>-->
 <!--/noindex-->
 <br>
 <br>

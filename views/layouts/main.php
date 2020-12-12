@@ -21,7 +21,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
     <meta name="yandex-verification" content="630983552bc35f28"/>
     <!--Yandex.Metrika counter-->
-    <script type="text/javascript">(function (d, w, c) {
+    <!--<script type="text/javascript">(function (d, w, c) {
             (w[c] = w[c] || []).push(function () {
                 try {
                     w.yaCounter49770670 = new Ya.Metrika2({
@@ -47,14 +47,14 @@ AppAsset::register($this);
         })(document, window, "yandex_metrika_callbacks2");</script>
     <noscript>
         <div><img src="https://mc.yandex.ru/watch/49770670" style="position:absolute; left:-9999px;" alt=""/></div>
-    </noscript>
+    </noscript>-->
 </head>
 <body>
 <div id="main-box">
     <!--noindex-->
     <!--    <div class="designer-box"><a class="pjax" rel="nofollow" href="/designer">вызвать замерщика</a></div>-->
     <!--    -->
-    <a href="/call" data-tooltip="Оставьте свой номер телефона и мы перезвоним Вам" data-placement="left" class="pjax"
+    <!--<a href="/call" data-tooltip="Оставьте свой номер телефона и мы перезвоним Вам" data-placement="left" class="pjax"
        rel="nofollow" id="popup__toggle">
         <div class="circlephone" style="transform-origin: center;"></div>
         <div class="circle-fill" style="transform-origin: center;">
@@ -62,9 +62,29 @@ AppAsset::register($this);
         <div class="img-circle" style="transform-origin: center;">
             <div class="img-circleblock" style="transform-origin: center;"></div>
         </div>
-    </a>
+    </a>-->
     <!--    -->
-    <div id="scroller"><i class="fa fa-angle-up"></i></div>
+    <!-- loader -->
+    <div id="container_loading">
+        <!--        <i class="fas fa-spinner fa-spin"></i>-->
+        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             x="0px" y="0px"
+             width="70px" height="70px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;"
+             xml:space="preserve">
+  <path fill="#DB3A0A"
+        d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+      <animateTransform attributeType="xml"
+                        attributeName="transform"
+                        type="rotate"
+                        from="0 25 25"
+                        to="360 25 25"
+                        dur="0.6s"
+                        repeatCount="indefinite"/>
+  </path>
+  </svg>
+    </div>
+    <!-- end loader -->
+    <!-- <div id="scroller"><i class="fa fa-angle-up"></i></div> -->
     <!--/noindex-->
     <div id="fh5co-hero" style="max-width: 1366px">
         <!--        <div>-->
@@ -78,6 +98,32 @@ AppAsset::register($this);
         </div>
         <!--        </div>-->
     </div>
+    <!--Окно чата-->
+    <audio preload="auto">
+        <source src="/audio/buben.mp3" type="audio/mpeg">
+        <source src="/audio/buben.ogg" type="audio/ogg">
+    </audio>
+    <div id="msg-block" data-closed data-toggle="tooltip" data-trigger="manual" title="<?= hello() ?>,я <?= Yii::$app->params['manager'] ?>.Чем могу помочь ?">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+        <div id="msg-content">
+            <div class="msg-closed button-anim">
+                <i class="fab fa-viber viber"></i> <i class="fab fa-whatsapp wats"></i>
+                <b  class="msg-closed-text">Начните чат</b>
+            </div>
+            <img class="msg-img img-circle" src="/img/msg.jpg" alt="">
+            <div class="msg-text">
+                <div class="text-center"><?= hello() ?>,я <?= Yii::$app->params['manager'] ?>.</div>
+                <div class="text-center text-info">выберите мессенджер и начните чат</div>
+                <i style="display:block;text-align: right"><span class="fa fa-check"></span><?= date('H:i') ?>&nbsp;&nbsp;</i>
+            </div>
+            <hr>
+            <a class="msg-btn viber-bg" href="viber://chat?number=<?= Yii::$app->params['msgNum'] ?>"
+               target="_blank"><i class="fab fa-viber""></i> Viber</a>
+            <a class="msg-btn watsap-bg" href="whatsapp://send?phone=<?= Yii::$app->params['msgNum'] ?>"
+               target="_blank"><i class="fab fa-whatsapp"></i> Watsapp</a>
+        </div>
+    </div>
+    <!--/-->
     <?php Pjax::begin(
         [
             'clientOptions' => [
@@ -149,6 +195,7 @@ AppAsset::register($this);
         <!--<main>-->
         <?= $content ?>
         <!--</main>-->
+        <!--/-->
         <footer style="text-align: center">
             <p class="text-center">
                 <b style="font-size: 120%;color: #e61b05">SOLO</b> мебель&nbsp;Copyright
@@ -164,9 +211,9 @@ AppAsset::register($this);
                 <span itemprop="openingHours" datetime="Mo-Fr 10:00−21:00">Пн-Сб 10<sup>00</sup>&mdash;21<sup>00</span>
                 &nbsp;&nbsp;<span>Вс 10<sup>00</sup>&mdash;20<sup>00</span>
             </p>
-            <b class="text-center"><b class="header_shadow">Адрес :</b> пр. Ивана Яковлева 4б 4этаж (МТВ-центр)</b>
+            <b class="text-center"><b class="header_shadow">Адрес :</b> ул. Калинина 105а (Мега молл)</b>
             <br><br><br><span style="font-size:90%;font-style:italic;font-weight: normal">сайт разработан группой <spaan style="font-weight: bolder;font-style: normal;letter-spacing: 1px">
-                    <a href="https://alexart21.ru" style="color: #0000ff !important;">ALEXART21.RU</a></spaan></span>
+                    <a href="http://l917678y.beget.tech/" style="color: #0000ff !important;">ALEXART21.RU</a></spaan></span>
         </footer>
     </div>
     <?php $this->endBody() ?>
@@ -179,10 +226,11 @@ AppAsset::register($this);
         ////
         $(document).on('pjax:beforeSend', function () {
             document.body.style.cursor = 'progress';
-
+            $('#container_loading').show();
         });
         $(document).on('pjax:complete', function () {
             document.body.style.cursor = 'default';
+            $('#container_loading').hide();
 //            $("#fh5co-hero").css('background-image', 'default');
         });
         // Window Scroll
@@ -236,7 +284,9 @@ AppAsset::register($this);
         //
         var w = document.body.clientWidth;
         if (w > 1366) {
+            let msgBlock = document.getElementById('msg-block');
             console.log(w);
+            msgBlock.style.right = (w - 1366)/2 + 'px';
             $('#main-box,#fh5co-hero,#fh5co-header-section').css({
                 'width': '1366px',
                 'margin': '0 auto'

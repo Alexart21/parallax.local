@@ -24,13 +24,13 @@ GaleryAsset::register($this);
 <body>
 <!--<div class="designer-box pjax"><a rel="nofollow" href="/designer">вызвать замерщика</a></div>-->
 <!--    -->
-<a href="/call" data-tooltip="Оставьте свой номер телефона и мы перезвоним Вам" data-placement="left" class="pjax" rel="nofollow" id="popup__toggle">
+<!--<a href="/call" data-tooltip="Оставьте свой номер телефона и мы перезвоним Вам" data-placement="left" class="pjax" rel="nofollow" id="popup__toggle">
     <div class="circlephone" style="transform-origin: center;"></div>
     <div class="circle-fill" style="transform-origin: center;">
     </div><div class="img-circle" style="transform-origin: center;">
         <div class="img-circleblock" style="transform-origin: center;"></div>
     </div>
-</a>
+</a>-->
 <!--    -->
 <div id="scroller"><i class="fa fa-angle-up"></i></div>
 <?php Pjax::begin(
@@ -136,9 +136,9 @@ GaleryAsset::register($this);
             <span itemprop="openingHours" datetime="Mo-Fr 10:00−21:00">Пн-Сб 10<sup>00</sup>&mdash;21<sup>00</span>
             &nbsp;&nbsp;<span>Вс 10<sup>00</sup>&mdash;20<sup>00</span>
         </p>
-        <b class="text-center"><b class="header_shadow">Адрес :</b> пр. Ивана Яковлева 4б 4этаж (МТВ-центр)</b>
+        <b class="text-center"><b class="header_shadow">Адрес :</b> ул. Калинина 105а (Мега молл)</b>
         <br><br><br><span style="font-size:90%;font-style:italic;font-weight: normal">сайт разработан группой <spaan style="font-weight: bolder;font-style: normal;letter-spacing: 1px">
-                    <a href="https://alexart21.ru" style="color: #0000ff !important;">ALEXART21.RU</a></spaan></span>
+                    <a href="http://l917678y.beget.tech/" style="color: #0000ff !important;">ALEXART21.RU</a></spaan></span>
     </footer>
 </div>
 <?php $this->endBody() ?>

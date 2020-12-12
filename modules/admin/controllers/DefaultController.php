@@ -3,10 +3,11 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use yii\web\Controller;
-use yii\db\ActiveRecord;
+//use yii\web\Controller;
+//use yii\db\ActiveRecord;
 use app\modules\admin\models\Content;
 use app\modules\admin\models\Galery;
+use yii\helpers\FileHelper;
 
 /**
  * Default controller for the `admin` module
@@ -28,13 +29,14 @@ class DefaultController extends AppAdminController
     public function actionLast()
     {
         if (Yii::$app->request->isAjax) {
+            // очищаем кэш
+            Yii::$app->cache->flush();
 
             // таблица Content
             // start transaction
             $flag = true;
-            $transaction = Yii::$app->db->beginTransaction();
             $lastContent = Content::find()->where(true)->all();
-
+//            debug($lastContent);die;
             foreach ($lastContent as $last) {
                 $time = time() - rand(60, 300); // разброс от 1 до 5 минут
                 $last->last_mod = $time;
@@ -44,43 +46,75 @@ class DefaultController extends AppAdminController
                     break;
                 }
             }
+
             // таблица Galery
             $lastGalery = Galery::find()->where(true)->all();
-
             foreach ($lastGalery as $last) {
                 $time = time() - rand(60, 300); // разброс от 1 до 5 минут
                 $last->timestamp = $time;
-                $res = $last->save();
-                $flag = ($flag && $res) ? true : false;
-                if (!$flag){
-                    break;
-                }
+                $last->save();
             }
 
-            if ($flag){
-                $transaction->commit();
-                $msg = 'Успешно!';
-            }else{
-                $transaction->rollBack();
-                $msg = '<span style="color:red">Сбой!</span>';
-            }
+            $result = $flag ? true : false;
+            $flag = true;
+            $header = '<h3>LastModified</h3>';
+            return $this->renderAjax('modal', compact('result', 'flag', 'header'));
 
-            return $this->renderFile('@app/modules/admin/views/alert.php', compact('msg'));
+//            return $this->renderFile('@app/modules/alexadmx/views/alert.php', compact('result'));
         }
     }
-
     /* Очистка кэша */
     public function actionCache()
     {
         if (Yii::$app->request->isAjax) {
-            if (Yii::$app->cache->flush()) {
-                $msg = 'Успешно!';
-            }else{
-                $msg = '<span style="color:red">Сбой!</span>';
-            }
-            return $this->renderFile('@app/modules/admin/views/alert.php', compact('msg'));
+            $result = Yii::$app->cache->flush();
+            $flag = true;
+            $header = '<h3>Очистка кэша</h3>';
+            return $this->renderAjax('modal', compact('result', 'flag', 'header'));
         }
     }
-    
+
+    /* Очистка временных и.т.п. папок */
+    public function actionClear()
+    {
+        if (Yii::$app->request->isAjax) {
+            $dirArr = require_once __DIR__ . '/../views/inc/dirArr.php'; // здесь массив с очищаемыми папками
+            $fileCount = $dirCount = $errCount = 0; // счетчики
+            $clearSize = 0; // сколько удалено(освобождено байт)
+            foreach ($dirArr as $dirPath) {
+                $dirPath = __DIR__ . '/../../../' . $dirPath;
+                $fileArr =  FileHelper::findFiles($dirPath);
+                $dirList = FileHelper::findDirectories($dirPath);
+                // удаление файлов
+                foreach ($fileArr as $filePath) {
+                    if(isset($filePath)) {
+                        $size = @filesize($filePath);
+                        $fRes = @unlink($filePath);
+                        $clearSize += $size;
+                    }
+                    if ($fRes) {
+                        $fileCount++;
+                    } else {
+                        $errCount++;
+                    }
+                }
+                // удаление директорий (если есть)
+                foreach ($dirList as $dir){
+                    if(isset($dir)){
+                        $dRes = @rmdir($dir);
+                    }
+
+                    if ($dRes) {
+                        $dirCount++;
+                    } else {
+                        $errCount++;
+                    }
+                }
+            }
+        }
+        $header = '<h3>Очистка папок</h3>';
+        return $this->renderAjax('modal', compact('fileCount', 'dirCount', 'errCount', 'header', 'clearSize', 'dirArr'));
+//        return $this->renderAjax('modal');
+    }
     
 }
